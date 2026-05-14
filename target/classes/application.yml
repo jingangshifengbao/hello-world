@@ -1,0 +1,28 @@
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+jd:
+  checkin:
+    enabled: true
+    # Keep dry-run enabled until real account cookies are configured and you have permission to automate the account.
+    dry-run: true
+    cron: "0 10 9 * * *"
+    zone: Asia/Shanghai
+    request-timeout: 15s
+    endpoint: https://api.m.jd.com/client.action
+    function-id: signBeanIndex
+    app-id: ld
+    body: '{"fp":"-1","shshshfp":"-1","shshshfpa":"-1","referUrl":"-1","userAgent":"-1","jda":"-1","rnVersion":"3.9"}'
+    accounts:
+      - name: account-1
+        cookie: ${JD_COOKIE_1:pt_key=replace-me;pt_pin=replace-me;}
+        enabled: true
+      - name: account-2
+        cookie: ${JD_COOKIE_2:pt_key=replace-me;pt_pin=replace-me;}
+        enabled: false

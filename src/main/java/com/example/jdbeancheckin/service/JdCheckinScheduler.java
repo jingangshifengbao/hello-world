@@ -30,7 +30,7 @@ public class JdCheckinScheduler {
 		}
 
 		List<CheckinResult> results = checkinService.checkinAll();
-		long successCount = results.stream().filter(CheckinResult::success).count();
+		long successCount = results.stream().filter(CheckinResult::isSuccess).count();
 		log.info("JD bean check-in completed: {}/{} successful", successCount, results.size());
 	}
 }

@@ -35,8 +35,8 @@ class JdCheckinServiceTest {
 		List<CheckinResult> results = service.checkinAll();
 
 		assertThat(results).hasSize(1);
-		assertThat(results.get(0).accountName()).isEqualTo("main");
-		assertThat(results.get(0).success()).isTrue();
-		assertThat(results.get(0).message()).contains("dry-run");
+		assertThat(results.get(0).getAccountName()).isEqualTo("main");
+		assertThat(results.get(0).isSuccess()).isTrue();
+		assertThat(results.get(0).getMessage()).contains("dry-run");
 	}
 }

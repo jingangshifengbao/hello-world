@@ -17,6 +17,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 import java.time.Instant;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class JdCheckinService {
@@ -29,8 +30,8 @@ public class JdCheckinService {
 	public JdCheckinService(JdCheckinProperties properties, RestTemplateBuilder restTemplateBuilder) {
 		this.properties = properties;
 		this.restTemplate = restTemplateBuilder
-				.connectTimeout(properties.getRequestTimeout())
-				.readTimeout(properties.getRequestTimeout())
+				.setConnectTimeout(properties.getRequestTimeout())
+				.setReadTimeout(properties.getRequestTimeout())
 				.build();
 	}
 
@@ -38,7 +39,7 @@ public class JdCheckinService {
 		return properties.getAccounts().stream()
 				.filter(JdCheckinProperties.Account::isEnabled)
 				.map(this::checkin)
-				.toList();
+				.collect(Collectors.toList());
 	}
 
 	public CheckinResult checkin(JdCheckinProperties.Account account) {
